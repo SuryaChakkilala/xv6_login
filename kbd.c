@@ -3,6 +3,10 @@
 #include "defs.h"
 #include "kbd.h"
 
+
+int echo_flag = 1;
+
+
 int
 kbdgetc(void)
 {

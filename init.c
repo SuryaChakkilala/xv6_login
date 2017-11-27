@@ -6,15 +6,12 @@
 #include "fcntl.h"
 
 #define BUFFLEN 24
-#define ADMINPASS "allow"
-
-//int initParent = -1;
 
 char *argv[] = { "sh", 0 };
 
 int max_attempts = 3, registered_users = 2;
-char *regusers[] = {"user1", "user2"};
-char *regpass[] = {"password", "pass"};
+char *regusers[] = {"user"};
+char *regpass[] = {"pass"};
 
 int login(char *u, char *p) {
   int i;
@@ -35,7 +32,6 @@ int
 main(void)
 {
   int pid, wpid, loggedIn;
-  //initParent = getpid();
 
   if(open("console", O_RDWR) < 0){
     mknod("console", 1, 1);
@@ -58,14 +54,16 @@ main(void)
         printf(1, "Username: ");
         char *user = (char *)malloc(BUFFLEN);
         user = gets(user , 20);
+        
         //remove enter key
         switch(user[strlen(user) - 1]) {
           case '\n': case '\r':
           user[strlen(user) - 1] = 0;
         }
-        printf(1, "Password: ");
+        
+        printf(1, "Password :  ");
         char *pass = (char *)malloc(BUFFLEN);
-        pass = gets(pass , 20);
+        pass = gets_we(pass , 20);
         //remove enter key
         switch(pass[strlen(pass) - 1]) {
           case '\n': case '\r':
@@ -75,8 +73,8 @@ main(void)
         loggedIn = login(user, pass);
         if(loggedIn) {
           //opens shell for the user
-          printf(1, "Welcome back %s!\n", user);
-          exec("sh", argv);
+          printf(1, "Welcome back %s!\n", user);          
+          exec("sh", &user);
           printf(1, "init: exec login failed\n");
           exit();
         }
@@ -87,7 +85,6 @@ main(void)
       }
 
       printf(1, "Failed 3 attempts! Please reboot machine!\n");
-      //kill(initParent);
       while(1); //stall
       exit();
     }

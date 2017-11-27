@@ -443,3 +443,10 @@ sys_pipe(void)
   fd[1] = fd1;
   return 0;
 }
+
+int
+sys_rem(void)
+{
+  echo_flag = !echo_flag;
+  return 0;
+}

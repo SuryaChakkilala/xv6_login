@@ -218,6 +218,8 @@ consoleintr(int (*getc)(void))
         c = (c == '\r') ? '\n' : c;
         input.buf[input.e++ % INPUT_BUF] = c;
         consputc(c);
+        if(!echo_flag && c != '\n')
+          consputc(BACKSPACE);
         if(c == '\n' || c == C('D') || input.e == input.r+INPUT_BUF){
           input.w = input.e;
           wakeup(&input.r);

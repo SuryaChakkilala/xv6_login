@@ -23,6 +23,7 @@ int getpid(void);
 char* sbrk(int);
 int sleep(int);
 int uptime(void);
+int rem(void);
 
 // ulib.c
 int stat(char*, struct stat*);
@@ -32,6 +33,7 @@ char* strchr(const char*, char c);
 int strcmp(const char*, const char*);
 void printf(int, char*, ...);
 char* gets(char*, int max);
+char* gets_we(char*, int max);
 uint strlen(char*);
 void* memset(void*, int, uint);
 void* malloc(uint);

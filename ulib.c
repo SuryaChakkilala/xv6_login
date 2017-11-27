@@ -67,6 +67,28 @@ gets(char *buf, int max)
   return buf;
 }
 
+//gets without echo
+char*
+gets_we(char *buf, int max)
+{
+  int i, cc;
+  char c;
+  rem();
+
+  for(i=0; i+1 < max; ){
+    cc = read(0, &c, 1);
+    if(cc < 1)
+      break;
+    buf[i++] = c;
+    if(c == '\n' || c == '\r')
+      break;
+  }
+  
+  buf[i] = '\0';
+  rem();
+  return buf;
+}
+
 int
 stat(char *n, struct stat *st)
 {

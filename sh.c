@@ -13,6 +13,8 @@
 
 #define MAXARGS 10
 
+char *user_l;
+
 struct cmd {
   int type;
 };
@@ -133,7 +135,7 @@ runcmd(struct cmd *cmd)
 int
 getcmd(char *buf, int nbuf)
 {
-  printf(2, "$ ");
+  printf(2, "%s: $ ", user_l);
   memset(buf, 0, nbuf);
   gets(buf, nbuf);
   if(buf[0] == 0) // EOF
@@ -142,10 +144,11 @@ getcmd(char *buf, int nbuf)
 }
 
 int
-main(void)
+main(int argc, char **argv)
 {
   static char buf[100];
   int fd;
+  user_l = argv[0];
 
   // Ensure that three file descriptors are open.
   while((fd = open("console", O_RDWR)) >= 0){
@@ -164,7 +167,7 @@ main(void)
         printf(2, "cannot cd %s\n", buf+3);
       continue;
     }
-    if(fork1() == 0)
+    if(fork1() == 0) 
       runcmd(parsecmd(buf));
     wait();
   }
