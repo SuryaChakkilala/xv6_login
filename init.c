@@ -6,18 +6,19 @@
 #include "fcntl.h"
 
 #define BUFFLEN 24
+#define MAX_ATTEMPTS  3
+#define REG_USERS = 1
 
 char *argv[] = { "sh", 0 };
 
-int max_attempts = 3, registered_users = 2;
-char *regusers[] = {"user"};
-char *regpass[] = {"pass"};
+char *regusers[] = {"root"};
+char *regpass[] = {"password"};
 
 int login(char *u, char *p) {
   int i;
   int loggedIn = 0;
   
-  for(i = 0 ; i < registered_users ; i++) {
+  for(i = 0 ; i < REG_USERS ; i++) {
     //printf(1, "%s %s %s %s %d %d\n", u, regusers[i], p, regpass[i], !strcmp(u, regusers[i]), !strcmp(p, regpass[i]));
     if(!strcmp(u, regusers[i]) && !strcmp(p, regpass[i])) {
       loggedIn = 1;
@@ -50,7 +51,7 @@ main(void)
     if(pid == 0){
       int count=0;
 
-      while(count<3){
+      while(count < MAX_ATTEMPTS){
         printf(1, "Username: ");
         char *user = (char *)malloc(BUFFLEN);
         user = gets(user , 20);

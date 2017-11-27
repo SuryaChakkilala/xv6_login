@@ -1,3 +1,20 @@
+# xv6-with-login
+
+This repository contains a small modification over the official MIT xv6 repository to expect the superuser (or root user) to login before being given access to the shell. The default username and password have been hardcoded into the init process' code. 
+    Username:   root
+    Password:   password
+
+The user will be prompted for this username and password once the boot process is completed, before the shell prompt. The user has 3 attempts to get the right username and password combination.
+
+This project was done as part of an `Introduction to Operating Systems` course at PES University.
+
+#### Contributions 
+
+I would like to thank [Aditi Srinivas](https://github.com/aditisrinivas97) for finding the right function call used by the keyboard driver so as to enable disabling echo of the keyboard input while the password is typed into the console.
+
+
+## Original README
+
 xv6 is a re-implementation of Dennis Ritchie's and Ken Thompson's Unix
 Version 6 (v6).  xv6 loosely follows the structure and style of v6,
 but is implemented for a modern x86-based multiprocessor using ANSI C.
