@@ -1,8 +1,10 @@
 # xv6-with-login
 
 This repository contains a small modification over the official MIT xv6 repository to expect the superuser (or root user) to login before being given access to the shell. The default username and password have been hardcoded into the init process' code. 
+```
     Username:   root
     Password:   password
+```
 
 The user will be prompted for this username and password once the boot process is completed, before the shell prompt. The user has 3 attempts to get the right username and password combination.
 
