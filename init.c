@@ -7,12 +7,12 @@
 
 #define BUFFLEN 24
 #define MAX_ATTEMPTS  3
-#define REG_USERS = 1
+#define REG_USERS  2
 
 char *argv[] = { "sh", 0 };
 
-char *regusers[] = {"root"};
-char *regpass[] = {"password"};
+char *regusers[] = {"root", "user1"};
+char *regpass[] = {"password", "password1"};
 
 int login(char *u, char *p) {
   int i;
